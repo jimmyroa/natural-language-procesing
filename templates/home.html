@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                let text = document.querySelector('textarea').value;
+                document.querySelector('.result').innerText = 'Loading...';
+                fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({text: text})
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector('.result').innerText = data.result;
+                    });
+            });
+        });
+    </script>
+</head>
+<body>
+<form>
+    <textarea name="text" rows="4" cols="50"></textarea><br>
+    <input type="submit" value="Submit">
+</form>
+<p>Result: <span class="result"></span> </p>
+</body>
+</html>
