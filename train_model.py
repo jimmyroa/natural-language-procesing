@@ -39,9 +39,13 @@ def main():
     X_train, X_temp, y_train, y_temp = train_test_split(X_new, labeled_dataset['label'], test_size=0.4, random_state=42)
     X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
 
-    # Load the saved model
-    max_length = 100
-    model = TextClassifier(max_length=max_length)
+    # Define hyperparameters
+    vocab_size = 5000  # Number of unique words in the vocabulary
+    embedding_dim = 128  # Size of word embeddings
+    max_length = 100  # Maximum length of input sequences
+
+    # Instantiate the model
+    model = TextClassifier(vocab_size=vocab_size, embedding_dim=embedding_dim, max_length=max_length)
 
     # Compile the model
     model.compile(optimizer='adam',

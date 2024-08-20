@@ -51,8 +51,13 @@ def main():
     val_dataset = get_dataset(X_val, y_val, batch_size=batch_size, shuffle=False)
     test_dataset = get_dataset(X_test, y_test, batch_size=batch_size, shuffle=False)
 
+    # Define hyperparameters
+    vocab_size = 5000  # Number of unique words in the vocabulary
+    embedding_dim = 128  # Size of word embeddings
+    max_length = 100  # Maximum length of input sequences
+
     # Instantiate the model
-    model = TextClassifier(max_length=max_length)
+    model = TextClassifier(vocab_size=vocab_size, embedding_dim=embedding_dim, max_length=max_length)
 
     # Compile the model
     model.compile(optimizer='adam',
