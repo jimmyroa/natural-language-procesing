@@ -1,15 +1,16 @@
 import pickle
 from flask import Flask
 from flask import request, render_template
-from model import TextClassifier
-from utils import clean_text
 
+from main import TextClassifier, clean_text
 
-# Instantiate the model
-max_length = 100
-model = TextClassifier(max_length=max_length)
+# Define hyperparameters
+vocab_size = 5000  # Number of unique words in the vocabulary
+embedding_dim = 128  # Size of word embeddings
+max_length = 100  # Maximum length of input sequences
+model = TextClassifier(vocab_size, embedding_dim, max_length)
 
-model.load_weights('best_model.keras')
+model.load_weights('model.keras')
 
 # Load the vectorizer
 with open('vectorizer.pkl', 'rb') as f:
